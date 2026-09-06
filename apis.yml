@@ -1,17 +1,32 @@
 aid: abgenomics
 name: Abgenomics
-description: 'Abgenomics is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'AbGenomics (AbGenomics International, Inc.) is a clinical-stage biopharmaceutical
+  company founded in 2000 with offices in the San Francisco Bay Area, California and an
+  R&D center in Taipei, Taiwan. It develops targeted antibody therapeutics for immune-mediated
+  inflammatory disease and cancer, built on a PSGL-1 T-cell checkpoint regulator platform,
+  with clinical candidates including neihulizumab (AbGn-168H / ALTB-168) and the antibody-drug
+  conjugate AbGn-107. The company rebranded as AltruBio, Inc. in 2020 and now operates at
+  altrubio.com; the original abgenomics.com domain is a parked for-sale listing. It is a
+  therapeutics developer, not a software vendor: it publishes no developer program, no public
+  API, no SDKs and no machine-readable API description of any kind.'
 url: https://raw.githubusercontent.com/api-evangelist/abgenomics/refs/heads/main/apis.yml
+image: https://www.altrubio.com/assets/img/logo.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: 'enrichment pass 2026-09-06: full STEP 0b contract discovery run across abgenomics.com and the successor altrubio.com — no OpenAPI, GraphQL, MCP, A2A card, WSDL, proto or well-known document found; clinical-stage biopharma with no developer program'
 specificationVersion: '0.20'
 created: '2026-09-06'
 modified: '2026-09-06'
 tags:
 - Company
+- Biotechnology
+- Pharmaceuticals
+- Life Sciences
+- Therapeutics
+- Clinical Research
+- Immunology
+- Oncology
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +34,45 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/abgenomics-domain-security.yml
 - type: Website
-  url: https://equityzen.com/company/abgenomics
+  url: https://www.altrubio.com/altrubio/en
+- type: PrivacyPolicy
+  url: https://www.altrubio.com/altrubio/en/privacy
+- type: Support
+  url: https://www.altrubio.com/altrubio/en/contact
+x-successor:
+  name: AltruBio, Inc.
+  website: https://www.altrubio.com/altrubio/en
+  note: >-
+    AbGenomics rebranded as AltruBio, Inc. in 2020 (name change, new leadership, shift from
+    oncology to immunology). The Website/PrivacyPolicy/Support pointers resolve to the successor's
+    live site because the company's own abgenomics.com domain now serves an abovedomains.com
+    "this domain may be for sale" parking page (HTTP 200, 1,005 bytes, ns1/ns2.abovedomains.com).
+x-enrichment:
+  date: '2026-09-06'
+  status: minimal
+  artifacts_added: 2
+  pass: local-v3
+x-coverage:
+  state: none
+  reason: not-a-software-company
+  detail: >-
+    AbGenomics is a clinical-stage biopharmaceutical developer of antibody therapeutics (now
+    trading as AltruBio) whose product is a drug pipeline, not software — its own abgenomics.com
+    domain has been released to an abovedomains.com "this domain may be for sale" parking page,
+    and the successor site altrubio.com publishes only pipeline, news and careers pages with no
+    developer program, no API, no SDK and no /llms.txt.
+  evidence:
+    - url: https://abgenomics.com/
+      status: 200
+    - url: https://abgenomics.com/.well-known/apis.json
+      status: 404
+    - url: https://www.altrubio.com/altrubio/en
+      status: 200
+    - url: https://www.altrubio.com/llms.txt
+      status: 200
+    - url: https://api.github.com/orgs/abgenomics
+      status: 404
+  checked: '2026-09-06'

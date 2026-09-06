@@ -1,0 +1,160 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Direct HTTP probes of the closed path list in pipeline-enrich.md against every host this
+  record knows: the company's own registrable domain (abgenomics.com, parked) and the
+  successor brand's live site (altrubio.com / www.altrubio.com). No API baseURL or OpenAPI
+  servers[] host exists for this provider.
+hit_count: 0
+note: >-
+  ZERO documents served. Both hosts are catch-alls and neither returns a real
+  /.well-known/ document. abgenomics.com is an abovedomains.com parked "domain may be for
+  sale" page that answers 200 with the SAME parking HTML for arbitrary extensionless paths
+  (/.well-known/security.txt, /.well-known/api-catalog, /api-docs, /graphql, /apis.yml) and
+  404s .json paths. altrubio.com 302s every unknown path to https://www.altrubio.com/altrubio/en
+  and serves the 74KB marketing homepage. Per the recipe, a 200 carrying an HTML shell is NOT
+  a document, so NO WellKnown and NO SecurityTxt pointer is emitted.
+soft_404_control:
+  - host: https://abgenomics.com
+    path: /.well-known/abgenomics-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 236
+    result: passed
+    note: >-
+      The .json control 404s, but extensionless paths on this host return the 1,132-byte parking
+      page with HTTP 200 — every extensionless "200" below is that page, not a document.
+  - host: https://www.altrubio.com
+    path: /.well-known/abgenomics-negative-control-7f3ab91c.json
+    status: 200
+    bytes: 74378
+    result: failed
+    note: >-
+      Control path that cannot exist returns 200 with the marketing homepage after a 302.
+      Every 302/200 on this host is the catch-all; no hit on this host can be trusted.
+  - host: https://altrubio.com
+    path: /.well-known/abgenomics-negative-control-7f3ab91c.json
+    status: 200
+    bytes: 74270
+    result: failed
+hosts:
+  - host: https://abgenomics.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        note: parked-domain HTML (1,132 bytes) — not a document
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        note: parked-domain HTML (1,156 bytes) — not a document
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        note: parked-domain HTML (1,174 bytes) — not a document
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        file: null
+        note: parked-domain HTML (1,168 bytes) — not a document
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        note: parked-domain HTML (1,129 bytes) — not a document
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/apis.json
+        status: 404
+        file: null
+      - path: /apis.json
+        status: 404
+        file: null
+      - path: /apis.yml
+        status: 200
+        file: null
+        note: parked-domain HTML (1,084 bytes) — not a document
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 404
+        file: null
+  - host: https://www.altrubio.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 302
+        file: null
+        note: 302 to https://www.altrubio.com/ then 200 marketing homepage
+      - path: /.well-known/openid-configuration
+        status: 302
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 302
+        file: null
+      - path: /.well-known/api-catalog
+        status: 302
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 302
+        file: null
+      - path: /.well-known/apis.json
+        status: 302
+        file: null
+      - path: /apis.json
+        status: 302
+        file: null
+      - path: /apis.yml
+        status: 302
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 302
+        file: null
+      - path: /.well-known/agent.json
+        status: 302
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 302
+        file: null
+  - host: https://altrubio.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 302
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 302
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 302
+        file: null
+      - path: /.well-known/api-catalog
+        status: 302
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 302
+        file: null
+      - path: /.well-known/apis.json
+        status: 302
+        file: null
+      - path: /apis.json
+        status: 302
+        file: null
+      - path: /apis.yml
+        status: 302
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 302
+        file: null
+      - path: /.well-known/agent.json
+        status: 302
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 302
+        file: null

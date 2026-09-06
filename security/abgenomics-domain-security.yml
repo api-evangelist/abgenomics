@@ -1,0 +1,36 @@
+generated: '2026-09-06'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.altrubio.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 25 10:13:57 2026 GMT
+  hsts: false
+- host: abgenomics.com
+  https: true
+  tls_version: null
+  cert_expires: null
+  hsts: false
+  note: >-
+    The company's original registrable domain. HTTPS answered 200 on the first probes of this
+    pass (abovedomains.com parking page, 1,005 bytes), then the origin began timing out
+    connections on repeat requests, so TLS version and certificate expiry could not be read.
+    This is the parking service's posture, not the company's — abgenomics.com is delegated to
+    ns1/ns2.abovedomains.com and advertises "This domain may be for sale".
+domains:
+- domain: altrubio.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: abgenomics.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: false
+  dmarc_policy: null
+  note: >-
+    SPF present but is the parking service's null-route record ("v=spf1 ip6:fdcf:abda:4154::/48
+    -all"), not a mail configuration the company operates. No DNSKEY, no CAA, no _dmarc record.
